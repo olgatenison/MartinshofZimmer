@@ -39,7 +39,7 @@ export default function BenefitsSection() {
                 <Icon className="h-6 w-6" strokeWidth={1.8} />
               </div>
 
-              <h3 className="font-serif text-lg tracking-widest uppercase text-dark-green">
+              <h3 className="font-serif text-lg tracking-wide uppercase text-dark-green">
                 {item.title}
               </h3>
 

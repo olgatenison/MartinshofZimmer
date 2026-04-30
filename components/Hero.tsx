@@ -2,10 +2,10 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="relative  overflow-hidden ">
+    <section className="relative  overflow-hidden  ">
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-5 pb-16 pt-8 lg:grid-cols-[0.92fr_1.08fr] lg:px-8  lg:pt-40 lg:pb-44">
         <div className="max-w-2xl">
-          <div className="mb-6 inline-flex items-center gap-3 text-gold ">
+          <div className="mb-6 inline-flex items-center gap-3 text-gold uppercase tracking-wide">
             <span className="h-2 w-2 rounded-full bg-gold" />
             Firmenapartments im Weinviertel
           </div>
@@ -22,7 +22,7 @@ export default function Hero() {
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <a
               href="#kontakt"
-              className="rounded-full bg-(--dark-green) px-7 py-4 text-center text-base  text-white shadow-xl shadow-(--dark-green)/20 transition hover:-translate-y-0.5 hover:bg-(--dark-green-hover) font-serif tracking-wide"
+              className="rounded-full bg-(--dark-green)/80 px-7 py-4 text-center text-base  text-white shadow-xl shadow-(--dark-green)/20 transition hover:-translate-y-0.5 hover:bg-(--dark-green-hover) font-serif tracking-wide"
             >
               Unterkunft anfragen
             </a>
@@ -41,7 +41,6 @@ export default function Hero() {
                 sizes="(min-width: 1024px) 56vw, 100vw"
                 className="object-cover"
               />
-              {/* <div className="absolute inset-0 bg-linear-to-tr from-[#10251d]/22 via-transparent to-white/10" /> */}
             </div>
           </div>
           {/* данні під картинкою */}
