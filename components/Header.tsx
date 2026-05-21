@@ -1,18 +1,24 @@
 // components/Header.tsx
 
+"use client";
+
+import { useState } from "react";
 import LocalSwitcher from "./LocalSwitcher";
 
 export default function Header() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const closeMenu = () => setIsOpen(false);
+
   return (
     <header className="fixed left-0 top-0 z-50 w-full border-b border-gold bg-(--bezel)/80 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8">
-        <a href="#top" className="flex items-center gap-3">
+        <a href="#top" className="flex items-center gap-3" onClick={closeMenu}>
           <div className="flex h-11 w-11 items-center justify-center rounded-full border border-gold font-serif text-2xl uppercase text-gold bg-be">
             M
           </div>
 
-          <div className="leading-tight text-gold">
-            {" "}
+          <div className="leading-tight">
             <div className="font-serif text-xl tracking-widest uppercase text-dark-green">
               Martinshof
             </div>
@@ -22,29 +28,109 @@ export default function Header() {
           </div>
         </a>
 
-        <nav className="hidden items-center gap-8 text-sm text-(--gray-green)  md:flex">
-          <a className="transition hover:text-white" href="#apartments">
+        {/* Desktop nav */}
+        <nav className="hidden items-center gap-8 text-sm text-(--gray-green) lg:flex">
+          <a className="transition hover:text-(--gold)" href="#apartments">
             Apartments
           </a>
-          <a className="transition hover:text-white" href="#vorteile">
+          <a className="transition hover:text-(--gold)" href="#vorteile">
             Vorteile
           </a>
-          <a className="transition hover:text-white" href="#konditionen">
+          <a className="transition hover:text-(--gold)" href="#konditionen">
             Konditionen
           </a>
-          <a className="transition hover:text-white" href="#kontakt">
+          <a className="transition hover:text-(--gold)" href="#kontakt">
             Kontakt
           </a>
         </nav>
-        <div className="flex items-center gap-3">
+
+        {/* Desktop actions */}
+        <div className="hidden items-center gap-3 md:flex">
           <a
             href="#kontakt"
-            className="rounded-full bg-bezel px-5 py-2.5 text-sm font-semibold text-(--dark-green)  transition-all duration-500 ease-out hover:bg-(--gold) hover:text-white font-wide font-serif border-gold border"
+            className="rounded-full bg-bezel px-5 py-2.5 text-sm font-semibold text-(--dark-green) transition-all duration-500 ease-out hover:bg-(--gold) hover:text-white font-wide font-serif border-gold border"
           >
             Unterkunft anfragen
           </a>
           <LocalSwitcher />
         </div>
+
+        {/* Mobile actions */}
+        <div className="flex items-center gap-3 md:hidden">
+          <LocalSwitcher />
+
+          <button
+            type="button"
+            onClick={() => setIsOpen((prev) => !prev)}
+            aria-label="Menu öffnen"
+            aria-expanded={isOpen}
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-gold text-gold"
+          >
+            <span className="relative h-4 w-5">
+              <span
+                className={`absolute left-0 top-0 h-0.5 w-5 bg-current transition ${
+                  isOpen ? "translate-y-2 rotate-45" : ""
+                }`}
+              />
+              <span
+                className={`absolute left-0 top-2 h-0.5 w-5 bg-current transition ${
+                  isOpen ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`absolute left-0 top-4 h-0.5 w-5 bg-current transition ${
+                  isOpen ? "-translate-y-2 -rotate-45" : ""
+                }`}
+              />
+            </span>
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      <div
+        className={`lg:hidden overflow-hidden border-t border-gold bg-(--bezel)/95 backdrop-blur-xl transition-all duration-300 ${
+          isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <nav className="flex flex-col px-5 py-5 text-sm uppercase tracking-[0.18em] text-(--gray-green)">
+          <a
+            className="border-b border-gold/30 py-3 transition hover:text-(--gold)"
+            href="#apartments"
+            onClick={closeMenu}
+          >
+            Apartments
+          </a>
+          <a
+            className="border-b border-gold/30 py-3 transition hover:text-(--gold)"
+            href="#vorteile"
+            onClick={closeMenu}
+          >
+            Vorteile
+          </a>
+          <a
+            className="border-b border-gold/30 py-3 transition hover:text-(--gold)"
+            href="#konditionen"
+            onClick={closeMenu}
+          >
+            Konditionen
+          </a>
+          <a
+            className="py-3 transition hover:text-(--gold)"
+            href="#kontakt"
+            onClick={closeMenu}
+          >
+            Kontakt
+          </a>
+
+          <a
+            href="#kontakt"
+            onClick={closeMenu}
+            className="mt-5 rounded-full bg-bezel px-5 py-3 text-center text-sm font-semibold text-(--dark-green) transition-all duration-500 ease-out hover:bg-(--gold) hover:text-white font-wide font-serif border-gold border"
+          >
+            Unterkunft anfragen
+          </a>
+        </nav>
       </div>
     </header>
   );
