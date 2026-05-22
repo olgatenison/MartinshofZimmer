@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Hero() {
   return (
     <section className="relative overflow-hidden">
-      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-5 pb-32 pt-24 lg:grid-cols-[0.92fr_1.08fr] lg:px-8  lg:pt-40 lg:pb-44">
+      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-5 pb-32 pt-24 lg:grid-cols-[0.92fr_1.08fr] lg:px-8  lg:pt-24 lg:pb-44">
         <div className="text-center lg:text-left mb-12">
           <div className="mb-6 inline-flex items-center justify-center gap-3 text-gold uppercase tracking-wide">
             <span className="h-2 w-2 rounded-full bg-gold" />

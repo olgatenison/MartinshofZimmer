@@ -13,7 +13,7 @@ export default function ContactSection() {
             Schreiben Sie uns
           </h2>
 
-          <p className="mt-5  text-white border-b-2 border-gold/30 pb-10">
+          <p className="mt-5  text-white border-b-2 border-gold/30 pb-10 text-balance">
             Wir melden uns schnellstmöglich mit passenden Informationen bei
             Ihnen.
           </p>
@@ -72,7 +72,7 @@ export default function ContactSection() {
 
           <button
             type="button"
-            className="mt-2 rounded-full bg-gold px-7 py-4 font-semibold text-white transition-all duration-500 ease-out hover:-translate-y-0.5 hover:bg-(--dark-green)/90 md:w-fit"
+            className="mt-2 rounded-full bg-gold px-7 py-4 font-semibold text-white transition-all duration-500 ease-out hover:-translate-y-0.5 hover:bg-(--dark-green)/90 "
           >
             Anfrage senden
           </button>

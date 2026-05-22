@@ -26,16 +26,16 @@ export default function TargetGroups() {
     <section className="bg-white py-24">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-          <div>
+          <div className="lg:text-left text-center">
             <p className="mb-6 text-sm uppercase tracking-wide text-gold">
               Für Unternehmen
             </p>
 
-            <h2 className="mt-4 font-serif text-4xl text-dark-green md:text-5xl">
+            <h2 className="mt-4 font-serif text-4xl text-dark-green md:text-5xl text-balance">
               Für welche Unternehmen das geeignet ist
             </h2>
 
-            <p className="mt-6 text-lg leading-8 text-gray-green">
+            <p className="mt-6 text-lg leading-8 text-gray-green text-balance">
               Unsere Apartments sind für Unternehmen gedacht, die Mitarbeiter
               für Projekte in Österreich einsetzen. Geeignet für Teams aus Bau,
               Montage und Industrie, die eine zuverlässige und klare
