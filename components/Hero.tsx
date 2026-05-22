@@ -4,25 +4,25 @@ export default function Hero() {
   return (
     <section className="relative overflow-hidden">
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-12 px-5 pb-32 pt-24 lg:grid-cols-[0.92fr_1.08fr] lg:px-8  lg:pt-40 lg:pb-44">
-        <div className="lg:max-w-2xl text-center xl:text-left">
-          <div className="mb-6 inline-flex items-center gap-3 text-gold uppercase tracking-wide">
+        <div className="text-center lg:text-left mb-12">
+          <div className="mb-6 inline-flex items-center justify-center gap-3 text-gold uppercase tracking-wide">
             <span className="h-2 w-2 rounded-full bg-gold" />
             Firmenapartments im Weinviertel
           </div>
 
-          <h1 className="font-serif text-5xl leading-[0.98] tracking-[-0.04em] text-(--dark-green) md:text-7xl lg:text-[4rem] text-balance">
+          <h1 className="mx-auto max-w-3xl font-serif text-5xl leading-[0.98] tracking-[-0.04em] text-(--dark-green) md:text-7xl lg:mx-0 lg:text-[4rem] text-balance">
             Komfortable Unterkünfte für Ihre Mitarbeiter
           </h1>
 
-          <p className="mt-7 max-w-xl text-lg leading-8 text-gray-green">
+          <p className="mx-auto mt-7 max-w-xl text-center text-lg leading-8 text-gray-green lg:mx-0 lg:text-left">
             Ideal für Bau-, Montage- und Industrieprojekte in Niederösterreich.
             Ruhige Lage, klare Ausstattung und unkomplizierte Abwicklung.
           </p>
 
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+          <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center lg:items-start lg:justify-start">
             <a
               href="#kontakt"
-              className="rounded-full bg-(--dark-green)/80 px-12 py-4 text-center text-base  text-white shadow-xl shadow-(--dark-green)/20 transition hover:-translate-y-0.5 hover:bg-(--dark-green-hover) font-serif tracking-wide"
+              className="rounded-full bg-(--dark-green)/80 px-12 py-4 text-center text-base text-white shadow-xl shadow-(--dark-green)/20 transition hover:-translate-y-0.5 hover:bg-(--dark-green-hover) font-serif tracking-wide"
             >
               Unterkunft anfragen
             </a>

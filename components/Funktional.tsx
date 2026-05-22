@@ -49,19 +49,19 @@ export default function Funktional() {
           Unsere Apartments
         </p>
 
-        <h2 className="mt-4 font-serif text-4xl text-dark-green md:text-6xl">
+        <h2 className="mt-4 font-serif text-4xl text-dark-green md:text-6xl text-balance">
           Funktional. Klar. Auf Arbeitsteams ausgelegt.
         </h2>
 
-        <p className="mt-6 text-lg leading-8 text-gray-green">
+        <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-green">
           Die Apartments bieten alles, was Mitarbeiter während eines Projekts
           brauchen: separate Schlafbereiche, eigene Küche und eine ruhige
           Umgebung nach der Arbeit.
         </p>
       </div>
 
-      <div className="mt-16 grid items-center gap-14 lg:grid-cols-[0.9fr_1fr]">
-        <div className="relative min-h-90">
+      <div className="mt-16 grid items-center gap-14 xl:grid-cols-[0.9fr_1fr]">
+        <div className="relative mx-auto min-h-90 w-full max-w-85 md:max-w-130 xl:max-w-none">
           <div className="absolute left-0 top-16 h-65 w-52.5 overflow-hidden rounded-[1.7rem] bg-white p-2 shadow-2xl shadow-dark-green/30 ring-1 ring-white/70 md:h-82.5 md:w-67.5">
             <div className="relative h-full w-full overflow-hidden rounded-[1.25rem]">
               <Image
@@ -69,7 +69,7 @@ export default function Funktional() {
                 alt="Martinshof Apartment Schlafzimmer"
                 fill
                 priority
-                sizes="(min-width: 1024px) 270px, 45vw"
+                sizes="(min-width: 1280px) 270px, 45vw"
                 className="object-cover"
               />
             </div>
@@ -82,28 +82,28 @@ export default function Funktional() {
                 alt="Martinshof Apartment Wohnbereich"
                 fill
                 priority
-                sizes="(min-width: 1024px) 240px, 42vw"
+                sizes="(min-width: 1280px) 240px, 42vw"
                 className="object-cover"
               />
             </div>
           </div>
         </div>
 
-        <div className="relative">
-          <div className="space-y-5">
+        <div className="relative mx-auto w-full max-w-160 xl:max-w-none">
+          <div className="mx-auto w-full max-w-130 space-y-5 xl:mx-0 xl:max-w-none">
             {apartmentFeatures.map((feature) => (
               <div
                 key={feature.title}
-                className="flex gap-4 border-b border-gold/30 pb-5"
+                className="grid grid-cols-1 border-b border-gold/30 pb-5 xl:grid-cols-[8px_1fr] xl:gap-4"
               >
-                <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-gold" />
+                <span className="mt-2 hidden h-2 w-2 rounded-full bg-gold xl:block" />
 
-                <div>
+                <div className="text-center xl:text-left">
                   <h3 className="font-serif text-lg uppercase tracking-wide text-dark-green">
                     {feature.title}
                   </h3>
 
-                  <p className="mt-2 max-w-xl text-base leading-7 text-gray-green">
+                  <p className="mt-2 text-base leading-7 text-gray-green">
                     {feature.text}
                   </p>
                 </div>
@@ -113,7 +113,7 @@ export default function Funktional() {
         </div>
       </div>
 
-      <div className="mt-24 grid gap-5 lg:grid-cols-3">
+      <div className="mt-24 grid gap-5 xl:grid-cols-3">
         {houses.map((house) => (
           <article
             key={house.name}
@@ -124,7 +124,7 @@ export default function Funktional() {
                 src={house.img}
                 alt={house.name}
                 fill
-                sizes="(min-width: 1024px) 33vw, 100vw"
+                sizes="(min-width: 1280px) 33vw, 100vw"
                 className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
 
