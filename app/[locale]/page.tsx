@@ -17,10 +17,30 @@ export default async function Page({
   const { locale } = await params;
   const messages = (await import(`../../messages/${locale}.json`)).default;
 
+  const baseUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://martinshof-rothenburg.de";
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: messages.Metadata.organizationName,
+    url: `${baseUrl}/${locale}`,
+    logo: `${baseUrl}/logo.png`,
+    sameAs: [],
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "DE",
+    },
+  };
+
   return (
-    <main className=" pt-10 bg-(--bezel) text-[#14231c]">
-      {/* <h1>{messages.test}</h1>
-      <p>Current locale: {locale}</p> */}
+    <main className="pt-10 bg-(--bezel) text-[#14231c]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd),
+        }}
+      />
 
       <Header />
       <Hero />

@@ -1,3 +1,11 @@
 {
-  "test": "Das ist Deutsch"
+  "Metadata": {
+    "title": "Martinshof Rothenburg Diakoniewerk – Arbeit, Bildung & Teilhabe",
+    "description": "Martinshof Rothenburg Diakoniewerk bietet Menschen mit Unterstützungsbedarf berufliche Teilhabe, Förderung, Beratung und individuelle Entwicklungsmöglichkeiten.",
+    "keywords": "Martinshof, Rothenburg, Diakoniewerk, berufliche Teilhabe, Werkstatt, Inklusion, Unterstützung, Bildung",
+    "siteName": "Martinshof Rothenburg Diakoniewerk",
+    "ogTitle": "Martinshof Rothenburg Diakoniewerk",
+    "ogDescription": "Berufliche Teilhabe, Förderung und individuelle Unterstützung für Menschen mit Assistenzbedarf.",
+    "organizationName": "Martinshof Rothenburg Diakoniewerk"
+  }
 }
