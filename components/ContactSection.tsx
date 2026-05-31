@@ -1,6 +1,97 @@
-// components/ContactSection.tsx
+"use client";
+
+import { FormEvent, useState } from "react";
 
 export default function ContactSection() {
+  const [status, setStatus] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    setStatus("");
+    setError("");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const name = String(formData.get("name") || "").trim();
+    const email = String(formData.get("email") || "").trim();
+    const company = String(formData.get("company") || "").trim();
+    const phone = String(formData.get("phone") || "").trim();
+    const message = String(formData.get("message") || "").trim();
+    const privacy = formData.get("privacy") === "on";
+
+    const nameRegex = /^[A-Za-zÄÖÜäöüßÀ-ÿ\s'-]{2,}$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!name) {
+      setError("Bitte geben Sie Ihren Namen ein.");
+      return;
+    }
+
+    if (!nameRegex.test(name)) {
+      setError("Der Name darf nur Buchstaben enthalten und muss mindestens 2 Zeichen lang sein.");
+      return;
+    }
+
+    if (!email) {
+      setError("Bitte geben Sie Ihre E-Mail-Adresse ein.");
+      return;
+    }
+
+    if (!emailRegex.test(email)) {
+      setError("Bitte geben Sie eine gültige E-Mail-Adresse ein.");
+      return;
+    }
+
+    if (!message) {
+      setError("Bitte schreiben Sie eine Nachricht.");
+      return;
+    }
+
+    if (!privacy) {
+      setError("Bitte stimmen Sie der Datenschutzerklärung zu.");
+      return;
+    }
+
+    const data = {
+      name,
+      email,
+      company,
+      phone,
+      message,
+      privacy,
+    };
+
+    try {
+      setLoading(true);
+
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        setError(result.message);
+        return;
+      }
+
+      setStatus(result.message);
+      form.reset();
+    } catch {
+      setError("Fehler beim Senden. Bitte versuchen Sie es später erneut.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <section id="kontakt" className="px-5 pb-24 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-10 rounded-[2.5rem] bg-white p-6 shadow-2xl shadow-dark-green/10 md:p-10 lg:grid-cols-[0.85fr_1.15fr]">
@@ -13,7 +104,7 @@ export default function ContactSection() {
             Schreiben Sie uns
           </h2>
 
-          <p className="mt-5  text-white border-b-2 border-gold/30 pb-10 text-balance">
+          <p className="mt-5 border-b-2 border-gold/30 pb-10 text-balance text-white">
             Wir melden uns schnellstmöglich mit passenden Informationen bei
             Ihnen.
           </p>
@@ -25,18 +116,19 @@ export default function ContactSection() {
           </div>
         </div>
 
-        <form className="grid gap-4 self-center">
+        <form onSubmit={handleSubmit} className="grid gap-4 self-center">
           <div className="grid gap-4 md:grid-cols-2">
             <input
               className="rounded-2xl border border-[#eadfcd] bg-[#fbf8f2] px-5 py-4 outline-none transition focus:border-gold"
-              placeholder="Name"
+              placeholder="Name *"
               name="name"
               type="text"
+              minLength={2}
             />
 
             <input
               className="rounded-2xl border border-[#eadfcd] bg-[#fbf8f2] px-5 py-4 outline-none transition focus:border-gold"
-              placeholder="E-Mail"
+              placeholder="E-Mail *"
               name="email"
               type="email"
             />
@@ -58,23 +150,32 @@ export default function ContactSection() {
 
           <textarea
             className="min-h-36 resize-none rounded-2xl border border-[#eadfcd] bg-[#fbf8f2] px-5 py-4 outline-none transition focus:border-gold"
-            placeholder="Nachricht"
+            placeholder="Nachricht *"
             name="message"
           />
 
-          <label className="flex gap-3 text-sm leading-6 text-gray-green items-center">
+          <label className="flex items-center gap-3 text-sm leading-6 text-gray-green">
             <input type="checkbox" className="mt-1" name="privacy" />
             <span>
               Ich willige in die Verarbeitung meiner Daten gemäß der
-              Datenschutzerklärung ein.
+              Datenschutzerklärung ein. *
             </span>
           </label>
 
+          {error && <p className="text-sm font-medium text-red-600">{error}</p>}
+
+          {status && (
+            <p className="rounded-2xl bg-green-50 px-5 py-4 text-sm font-medium text-green-800">
+              {status}
+            </p>
+          )}
+
           <button
-            type="button"
-            className="mt-2 rounded-full bg-gold px-7 py-4 font-semibold text-white transition-all duration-500 ease-out hover:-translate-y-0.5 hover:bg-(--dark-green)/90 "
+            type="submit"
+            disabled={loading}
+            className="mt-2 rounded-full bg-gold px-7 py-4 font-semibold text-white transition-all duration-500 ease-out hover:-translate-y-0.5 hover:bg-(--dark-green)/90 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            Anfrage senden
+            {loading ? "Wird gesendet..." : "Anfrage senden"}
           </button>
         </form>
       </div>
