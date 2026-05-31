@@ -10,7 +10,7 @@ export default function RootLayout({
     <html lang="de">
       <body>
         {children}
-        <CookieBanner />
+    
       </body>
     </html>
   );

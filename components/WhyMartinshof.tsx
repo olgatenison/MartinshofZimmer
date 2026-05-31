@@ -1,41 +1,42 @@
-// components/WhyMartinshof.tsx
+"use client";
 
+import { useTranslations } from "next-intl";
 import { MapPin, MessageCircle, Home } from "lucide-react";
 
 const reasons = [
   {
-    title: "Ruhige Lage mit guter Erreichbarkeit",
+    key: "location",
     icon: MapPin,
   },
   {
-    title: "Schnelle Kommunikation und verlässliche Abstimmung",
+    key: "communication",
     icon: MessageCircle,
   },
   {
-    title: "Gepflegte, funktionale Apartments",
+    key: "apartments",
     icon: Home,
   },
 ];
 
 export default function WhyMartinshof() {
+  const t = useTranslations("WhyMartinshof");
+
   return (
-    <section className=" px-5 py-24 lg:px-8">
+    <section className="px-5 py-24 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        <div className="max-w-2xl text-balance mx-auto text-center gap-6 flex flex-col ">
+        <div className="mx-auto flex max-w-2xl flex-col gap-6 text-center text-balance">
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-gold">
-              Warum Martinshof
+              {t("eyebrow")}
             </p>
 
             <h2 className="mt-4 font-serif text-4xl text-dark-green md:text-5xl">
-              Warum Unternehmen uns wählen
+              {t("title")}
             </h2>
           </div>
 
           <p className="text-lg leading-8 text-gray-green">
-            Als familiengeführtes Weingut im Weinviertel bieten wir nicht nur
-            Unterkünfte, sondern eine klare, funktionierende Lösung für
-            Unternehmen und ihre Mitarbeiter.
+            {t("description")}
           </p>
         </div>
 
@@ -46,7 +47,7 @@ export default function WhyMartinshof() {
 
               return (
                 <div
-                  key={item.title}
+                  key={item.key}
                   className="flex min-h-58 flex-col items-center justify-center rounded-[1.6rem] bg-[#f7f2ea] p-6 text-center transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg"
                 >
                   <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gold/15 text-dark-green">
@@ -54,7 +55,7 @@ export default function WhyMartinshof() {
                   </div>
 
                   <h3 className="max-w-72 font-serif text-base uppercase tracking-wide text-dark-green">
-                    {item.title}
+                    {t(`cards.${item.key}`)}
                   </h3>
                 </div>
               );

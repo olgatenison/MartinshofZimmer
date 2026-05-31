@@ -1,8 +1,12 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function ContactSection() {
+  const t = useTranslations("ContactSection");
+  const locale = useLocale();
+
   const [status, setStatus] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -27,43 +31,34 @@ export default function ContactSection() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!name) {
-      setError("Bitte geben Sie Ihren Namen ein.");
+      setError(t("errors.nameRequired"));
       return;
     }
 
     if (!nameRegex.test(name)) {
-      setError("Der Name darf nur Buchstaben enthalten und muss mindestens 2 Zeichen lang sein.");
+      setError(t("errors.nameInvalid"));
       return;
     }
 
     if (!email) {
-      setError("Bitte geben Sie Ihre E-Mail-Adresse ein.");
+      setError(t("errors.emailRequired"));
       return;
     }
 
     if (!emailRegex.test(email)) {
-      setError("Bitte geben Sie eine gültige E-Mail-Adresse ein.");
+      setError(t("errors.emailInvalid"));
       return;
     }
 
     if (!message) {
-      setError("Bitte schreiben Sie eine Nachricht.");
+      setError(t("errors.messageRequired"));
       return;
     }
 
     if (!privacy) {
-      setError("Bitte stimmen Sie der Datenschutzerklärung zu.");
+      setError(t("errors.privacyRequired"));
       return;
     }
-
-    const data = {
-      name,
-      email,
-      company,
-      phone,
-      message,
-      privacy,
-    };
 
     try {
       setLoading(true);
@@ -73,20 +68,27 @@ export default function ContactSection() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          name,
+          email,
+          company,
+          phone,
+          message,
+          privacy,
+        }),
       });
 
       const result = await res.json();
 
       if (!res.ok) {
-        setError(result.message);
+        setError(result.message || t("errors.server"));
         return;
       }
 
-      setStatus(result.message);
+      setStatus(t("success"));
       form.reset();
     } catch {
-      setError("Fehler beim Senden. Bitte versuchen Sie es später erneut.");
+      setError(t("errors.server"));
     } finally {
       setLoading(false);
     }
@@ -97,22 +99,34 @@ export default function ContactSection() {
       <div className="mx-auto grid max-w-7xl gap-10 rounded-[2.5rem] bg-white p-6 shadow-2xl shadow-dark-green/10 md:p-10 lg:grid-cols-[0.85fr_1.15fr]">
         <div className="rounded-4xl bg-dark-green/90 p-8 text-white md:p-10">
           <p className="text-xs uppercase tracking-[0.2em] text-gold">
-            Kontakt
+            {t("eyebrow")}
           </p>
 
           <h2 className="mt-4 font-serif text-4xl tracking-wide">
-            Schreiben Sie uns
+            {t("title")}
           </h2>
 
           <p className="mt-5 border-b-2 border-gold/30 pb-10 text-balance text-white">
-            Wir melden uns schnellstmöglich mit passenden Informationen bei
-            Ihnen.
+            {t("description")}
           </p>
 
           <div className="mt-10 space-y-5 text-white/86">
-            <p>+43 664 3567 360</p>
-            <p>weingut@martinshof.at</p>
-            <p>Hauptstraße 28, 2183 St. Ulrich – Neusiedl/Zaya, Österreich</p>
+            <p>
+              <a href="tel:+436643567360" className="transition hover:text-gold">
+                +43 664 3567 360
+              </a>
+            </p>
+
+            <p>
+              <a
+                href="mailto:weingut@martinshof.at"
+                className="transition hover:text-gold"
+              >
+                weingut@martinshof.at
+              </a>
+            </p>
+
+            <p>{t("address")}</p>
           </div>
         </div>
 
@@ -120,7 +134,7 @@ export default function ContactSection() {
           <div className="grid gap-4 md:grid-cols-2">
             <input
               className="rounded-2xl border border-[#eadfcd] bg-[#fbf8f2] px-5 py-4 outline-none transition focus:border-gold"
-              placeholder="Name *"
+              placeholder={t("fields.name")}
               name="name"
               type="text"
               minLength={2}
@@ -128,7 +142,7 @@ export default function ContactSection() {
 
             <input
               className="rounded-2xl border border-[#eadfcd] bg-[#fbf8f2] px-5 py-4 outline-none transition focus:border-gold"
-              placeholder="E-Mail *"
+              placeholder={t("fields.email")}
               name="email"
               type="email"
             />
@@ -136,29 +150,38 @@ export default function ContactSection() {
 
           <input
             className="rounded-2xl border border-[#eadfcd] bg-[#fbf8f2] px-5 py-4 outline-none transition focus:border-gold"
-            placeholder="Unternehmen"
+            placeholder={t("fields.company")}
             name="company"
             type="text"
           />
 
           <input
             className="rounded-2xl border border-[#eadfcd] bg-[#fbf8f2] px-5 py-4 outline-none transition focus:border-gold"
-            placeholder="Telefon"
+            placeholder={t("fields.phone")}
             name="phone"
             type="tel"
           />
 
           <textarea
             className="min-h-36 resize-none rounded-2xl border border-[#eadfcd] bg-[#fbf8f2] px-5 py-4 outline-none transition focus:border-gold"
-            placeholder="Nachricht *"
+            placeholder={t("fields.message")}
             name="message"
           />
 
-          <label className="flex items-center gap-3 text-sm leading-6 text-gray-green">
+          <label className="flex items-start gap-3 text-sm leading-6 text-gray-green">
             <input type="checkbox" className="mt-1" name="privacy" />
+
             <span>
-              Ich willige in die Verarbeitung meiner Daten gemäß der
-              Datenschutzerklärung ein. *
+              {t("privacyPrefix")}{" "}
+              <a
+                href={`/${locale}/datenschutz`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-gold transition hover:underline"
+              >
+                {t("privacyLink")}
+              </a>{" "}
+              {t("privacySuffix")}
             </span>
           </label>
 
@@ -175,7 +198,7 @@ export default function ContactSection() {
             disabled={loading}
             className="mt-2 rounded-full bg-gold px-7 py-4 font-semibold text-white transition-all duration-500 ease-out hover:-translate-y-0.5 hover:bg-(--dark-green)/90 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {loading ? "Wird gesendet..." : "Anfrage senden"}
+            {loading ? t("sending") : t("button")}
           </button>
         </form>
       </div>

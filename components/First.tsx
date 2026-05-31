@@ -1,13 +1,19 @@
+"use client";
+
 import Image from "next/image";
+import { useTranslations } from "next-intl";
+
 export default function First() {
+  const t = useTranslations("First");
+
   return (
-    <div className=" max-w-9xl mx-auto">
+    <div className="mx-auto max-w-9xl">
       <Image
-        alt=""
+        src="/1.jpg"
+        alt={t("imageAlt")}
         width={1400}
         height={560}
-        src="/1.jpg"
-        className="aspect-10/2 w-full object-cover "
+        className="aspect-10/2 w-full object-cover"
       />
     </div>
   );

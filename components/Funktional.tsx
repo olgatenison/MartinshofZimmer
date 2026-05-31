@@ -1,62 +1,47 @@
+"use client";
+
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const houses = [
   {
-    name: "Apartment Anne-Mari",
-    text: "Funktionale Unterkunft für Teams, die eine klare und unkomplizierte Wohnlösung benötigen.",
+    key: "anneMari",
     img: "/01a.png",
   },
   {
-    name: "Apartment Erich",
-    text: "Ideal für Monteure, Bau- und Projektteams mit Bedarf an separaten Schlafmöglichkeiten.",
+    key: "erich",
     img: "/02a.png",
   },
   {
-    name: "Apartment Herwig",
-    text: "Ruhig gelegen, gepflegt und auf längere Aufenthalte von Mitarbeitern ausgelegt.",
+    key: "herwig",
     img: "/03a.png",
   },
 ];
 
 const apartmentFeatures = [
-  {
-    title: "2–3 separate Apartments",
-    text: "Flexible Aufteilung für kleinere und größere Arbeitsteams.",
-  },
-  {
-    title: "4–6 Personen pro Apartment",
-    text: "Ausreichend Platz für Mitarbeiter während kurz- oder langfristiger Projekte.",
-  },
-  {
-    title: "Eigene Wohnküche",
-    text: "Praktisch ausgestattet für gemeinsames Kochen und Selbstversorgung.",
-  },
-  {
-    title: "Aufenthaltsbereich",
-    text: "Ein separater Bereich zum Essen, Entspannen und Zusammenkommen.",
-  },
-  {
-    title: "Voll ausgestattet",
-    text: "Alles Wesentliche ist vorhanden – funktional, sauber und unkompliziert.",
-  },
+  "apartments",
+  "persons",
+  "kitchen",
+  "livingArea",
+  "equipped",
 ];
 
 export default function Funktional() {
+  const t = useTranslations("Funktional");
+
   return (
     <section id="apartments" className="mx-auto max-w-7xl px-5 py-24 lg:px-8">
       <div className="mx-auto max-w-3xl text-center">
         <p className="text-sm uppercase tracking-wide text-gold">
-          Unsere Apartments
+          {t("eyebrow")}
         </p>
 
-        <h2 className="mt-4 font-serif text-4xl text-dark-green md:text-6xl text-balance">
-          Funktional. Klar. Auf Arbeitsteams ausgelegt.
+        <h2 className="text-balance mt-4 font-serif text-4xl text-dark-green md:text-6xl">
+          {t("title")}
         </h2>
 
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-green">
-          Die Apartments bieten alles, was Mitarbeiter während eines Projekts
-          brauchen: separate Schlafbereiche, eigene Küche und eine ruhige
-          Umgebung nach der Arbeit.
+          {t("description")}
         </p>
       </div>
 
@@ -66,7 +51,7 @@ export default function Funktional() {
             <div className="relative h-full w-full overflow-hidden rounded-[1.25rem]">
               <Image
                 src="/02.jpg"
-                alt="Martinshof Apartment Schlafzimmer"
+                alt={t("images.bedroom")}
                 fill
                 priority
                 sizes="(min-width: 1280px) 270px, 45vw"
@@ -79,7 +64,7 @@ export default function Funktional() {
             <div className="relative h-full w-full overflow-hidden rounded-[1.25rem]">
               <Image
                 src="/03.jpg"
-                alt="Martinshof Apartment Wohnbereich"
+                alt={t("images.livingArea")}
                 fill
                 priority
                 sizes="(min-width: 1280px) 240px, 42vw"
@@ -93,18 +78,18 @@ export default function Funktional() {
           <div className="mx-auto w-full max-w-130 space-y-5 xl:mx-0 xl:max-w-none">
             {apartmentFeatures.map((feature) => (
               <div
-                key={feature.title}
+                key={feature}
                 className="grid grid-cols-1 border-b border-gold/30 pb-5 xl:grid-cols-[8px_1fr] xl:gap-4"
               >
                 <span className="mt-2 hidden h-2 w-2 rounded-full bg-gold xl:block" />
 
                 <div className="text-center xl:text-left">
                   <h3 className="font-serif text-lg uppercase tracking-wide text-dark-green">
-                    {feature.title}
+                    {t(`features.${feature}.title`)}
                   </h3>
 
                   <p className="mt-2 text-base leading-7 text-gray-green">
-                    {feature.text}
+                    {t(`features.${feature}.text`)}
                   </p>
                 </div>
               </div>
@@ -116,13 +101,13 @@ export default function Funktional() {
       <div className="mt-24 grid gap-5 xl:grid-cols-3">
         {houses.map((house) => (
           <article
-            key={house.name}
+            key={house.key}
             className="group overflow-hidden rounded-4xl bg-white shadow-xl shadow-[#10251d]/8 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#10251d]/14"
           >
             <div className="relative aspect-4/3 overflow-hidden bg-[#eee4d4]">
               <Image
                 src={house.img}
-                alt={house.name}
+                alt={t(`houses.${house.key}.name`)}
                 fill
                 sizes="(min-width: 1280px) 33vw, 100vw"
                 className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -133,10 +118,12 @@ export default function Funktional() {
 
             <div className="p-7">
               <h3 className="font-serif text-lg uppercase tracking-wide text-dark-green">
-                {house.name}
+                {t(`houses.${house.key}.name`)}
               </h3>
 
-              <p className="mt-3 leading-7 text-gray-green">{house.text}</p>
+              <p className="mt-3 leading-7 text-gray-green">
+                {t(`houses.${house.key}.text`)}
+              </p>
             </div>
           </article>
         ))}

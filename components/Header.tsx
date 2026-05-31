@@ -3,10 +3,12 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import LocalSwitcher from "./LocalSwitcher";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const t = useTranslations("Header");
 
   const closeMenu = () => setIsOpen(false);
 
@@ -23,46 +25,43 @@ export default function Header() {
               Martinshof
             </div>
             <div className="text-xs uppercase tracking-[0.2em] text-gold">
-              Zimmer
+              {t("subtitle")}
             </div>
           </div>
         </a>
 
-        {/* Desktop nav */}
         <nav className="hidden items-center gap-8 text-sm text-(--gray-green) lg:flex">
           <a className="transition hover:text-(--gold)" href="#apartments">
-            Apartments
+            {t("nav.apartments")}
           </a>
           <a className="transition hover:text-(--gold)" href="#vorteile">
-            Vorteile
+            {t("nav.benefits")}
           </a>
           <a className="transition hover:text-(--gold)" href="#konditionen">
-            Konditionen
+            {t("nav.conditions")}
           </a>
           <a className="transition hover:text-(--gold)" href="#kontakt">
-            Kontakt
+            {t("nav.contact")}
           </a>
         </nav>
 
-        {/* Desktop actions */}
         <div className="hidden items-center gap-3 md:flex">
           <a
             href="#kontakt"
             className="rounded-full bg-bezel px-5 py-2.5 text-sm font-semibold text-(--dark-green) transition-all duration-500 ease-out hover:bg-(--gold) hover:text-white font-wide font-serif border-gold border"
           >
-            Unterkunft anfragen
+            {t("cta")}
           </a>
           <LocalSwitcher />
         </div>
 
-        {/* Mobile actions */}
         <div className="flex items-center gap-3 md:hidden">
           <LocalSwitcher />
 
           <button
             type="button"
             onClick={() => setIsOpen((prev) => !prev)}
-            aria-label="Menu öffnen"
+            aria-label={t("menuLabel")}
             aria-expanded={isOpen}
             className="flex h-11 w-11 items-center justify-center rounded-full border border-gold text-gold"
           >
@@ -87,7 +86,6 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile menu */}
       <div
         className={`lg:hidden overflow-hidden border-t border-gold bg-(--bezel)/95 backdrop-blur-xl transition-all duration-300 ${
           isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
@@ -99,28 +97,28 @@ export default function Header() {
             href="#apartments"
             onClick={closeMenu}
           >
-            Apartments
+            {t("nav.apartments")}
           </a>
           <a
             className="border-b border-gold/30 py-3 transition hover:text-(--gold)"
             href="#vorteile"
             onClick={closeMenu}
           >
-            Vorteile
+            {t("nav.benefits")}
           </a>
           <a
             className="border-b border-gold/30 py-3 transition hover:text-(--gold)"
             href="#konditionen"
             onClick={closeMenu}
           >
-            Konditionen
+            {t("nav.conditions")}
           </a>
           <a
             className="py-3 transition hover:text-(--gold)"
             href="#kontakt"
             onClick={closeMenu}
           >
-            Kontakt
+            {t("nav.contact")}
           </a>
 
           <a
@@ -128,7 +126,7 @@ export default function Header() {
             onClick={closeMenu}
             className="mt-5 rounded-full bg-bezel px-5 py-3 text-center text-sm font-semibold text-(--dark-green) transition-all duration-500 ease-out hover:bg-(--gold) hover:text-white font-wide font-serif border-gold border"
           >
-            Unterkunft anfragen
+            {t("cta")}
           </a>
         </nav>
       </div>

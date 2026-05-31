@@ -1,14 +1,18 @@
-// components/ConditionsSection.tsx
+"use client";
 
-const process = [
-  "Flexible Mietdauer: wöchentlich oder monatlich",
-  "Individuelle Preisgestaltung je nach Bedarf",
-  "Firmenrechnung selbstverständlich",
-  "Klare und transparente Abwicklung",
-  "Kurzfristige Lösungen möglich",
+import { useTranslations } from "next-intl";
+
+const processItems = [
+  "rentalDuration",
+  "pricing",
+  "invoice",
+  "transparentProcess",
+  "shortNotice",
 ];
 
 export default function ConditionsSection() {
+  const t = useTranslations("ConditionsSection");
+
   return (
     <section
       id="konditionen"
@@ -21,16 +25,15 @@ export default function ConditionsSection() {
         <div className="grid gap-14 xl:grid-cols-[0.9fr_1.1fr] xl:items-start">
           <div className="text-center xl:text-left">
             <p className="text-sm uppercase tracking-wide text-gold">
-              Konditionen
+              {t("eyebrow")}
             </p>
 
             <h2 className="mx-auto mt-4 max-w-xl font-serif text-4xl tracking-wide text-white md:text-5xl xl:mx-0">
-              So arbeiten wir
+              {t("title")}
             </h2>
 
-            <p className="mx-auto mt-6 max-w-lg text-lg leading-8 text-white/72 text-balance xl:mx-0">
-              Keine komplizierten Buchungswege, sondern eine direkte Abstimmung
-              und eine Lösung, die zum Projekt passt.
+            <p className="text-balance mx-auto mt-6 max-w-lg text-lg leading-8 text-white/72 xl:mx-0">
+              {t("description")}
             </p>
 
             <div className="mt-8 flex justify-center xl:justify-start">
@@ -38,13 +41,13 @@ export default function ConditionsSection() {
                 href="#kontakt"
                 className="inline-flex rounded-full bg-gold px-7 py-4 text-sm font-semibold tracking-[0.03em] text-white shadow-xl shadow-black/20 transition-all duration-500 ease-out hover:-translate-y-0.5 hover:bg-white hover:text-dark-green"
               >
-                Angebot anfordern
+                {t("button")}
               </a>
             </div>
           </div>
 
           <div className="mx-auto grid w-full max-w-140 gap-3 xl:max-w-none">
-            {process.map((item, index) => (
+            {processItems.map((item, index) => (
               <div
                 key={item}
                 className="group grid grid-cols-1 items-center rounded-3xl border border-white/10 bg-white/8 px-6 py-5 text-center backdrop-blur transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-white/12 sm:grid-cols-[44px_1fr] sm:gap-5 sm:text-left xl:grid-cols-[44px_1fr]"
@@ -54,7 +57,7 @@ export default function ConditionsSection() {
                 </div>
 
                 <p className="mt-3 text-base leading-7 text-white/82 sm:mt-0">
-                  {item}
+                  {t(`process.${item}`)}
                 </p>
               </div>
             ))}

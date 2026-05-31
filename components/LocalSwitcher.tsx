@@ -1,28 +1,14 @@
-// export default function LocalSwitcher() {
-//   return (
-//     <button
-//       type="button"
-//       className="flex h-11 w-11 items-center justify-center rounded-full border border-gold bg-bezel font-serif text-sm font-semibold uppercase leading-none text-(--dark-green) transition-all duration-500 ease-out hover:bg-(--gold) hover:text-white"
-//     >
-//       de
-//     </button>
-//   );
-// }
-// components/LocalSwitcher.tsx
-
 "use client";
 
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 
-const locales = [
-  { code: "de", label: "Deutsch" },
-  { code: "en", label: "English" },
-];
+const locales = [{ code: "de" }, { code: "en" }];
 
 export default function LocalSwitcher() {
   const locale = useLocale();
+  const t = useTranslations("LocaleSwitcher");
   const pathname = usePathname();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
@@ -36,10 +22,8 @@ export default function LocalSwitcher() {
       segments.unshift(nextLocale);
     }
 
-    const nextPath = `/${segments.join("/")}`;
-
     setIsOpen(false);
-    router.push(nextPath);
+    router.push(`/${segments.join("/")}`);
   }
 
   return (
@@ -47,7 +31,7 @@ export default function LocalSwitcher() {
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        aria-label="Sprache wechseln"
+        aria-label={t("ariaLabel")}
         aria-expanded={isOpen}
         className="flex h-11 w-11 items-center justify-center rounded-full border border-gold bg-bezel font-serif text-sm font-semibold uppercase leading-none text-(--dark-green) transition-all duration-500 ease-out hover:bg-(--gold) hover:text-white"
       >
@@ -78,7 +62,10 @@ export default function LocalSwitcher() {
               <span className="font-serif uppercase tracking-wide">
                 {item.code}
               </span>
-              <span className="text-xs opacity-75">{item.label}</span>
+
+              <span className="text-xs opacity-75">
+                {t(`languages.${item.code}`)}
+              </span>
             </button>
           );
         })}

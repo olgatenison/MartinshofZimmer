@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import "../globals.css";
+import CookieBanner from "@/components/CookieBanner";
+
+
 
 const locales = ["de", "en"];
 
@@ -107,6 +110,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     
         <NextIntlClientProvider locale={locale} messages={messages}>
           {children}
+           <CookieBanner />
         </NextIntlClientProvider>
       
     

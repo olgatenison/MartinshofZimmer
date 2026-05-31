@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 
 const COOKIE_CONSENT_KEY = "martinshof-cookie-consent";
@@ -15,6 +16,9 @@ function getInitialVisibility() {
 
 export default function CookieBanner() {
   const [isVisible, setIsVisible] = useState(getInitialVisibility);
+
+  const t = useTranslations("CookieBanner");
+  const locale = useLocale();
 
   function acceptCookies() {
     localStorage.setItem(COOKIE_CONSENT_KEY, "accepted");
@@ -34,22 +38,20 @@ export default function CookieBanner() {
         <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-gold">
-              Cookies
+              {t("label")}
             </p>
 
             <h2 className="mt-2 font-serif text-2xl text-dark-green">
-              Cookies & Datenschutz
+              {t("title")}
             </h2>
 
             <p className="mt-2 max-w-2xl text-sm leading-6 text-gray-green">
-              Diese Website verwendet technisch notwendige Cookies, um die
-              Funktionalität der Website zu gewährleisten. Weitere Informationen
-              finden Sie in unserer{" "}
+              {t("text")}{" "}
               <Link
-                href="/datenschutz"
+                href={`/${locale}/datenschutz`}
                 className="text-gold transition hover:underline"
               >
-                Datenschutzerklärung
+                {t("privacyLink")}
               </Link>
               .
             </p>
@@ -61,7 +63,7 @@ export default function CookieBanner() {
               onClick={declineCookies}
               className="rounded-full border border-dark-green px-5 py-3 text-sm font-semibold text-dark-green transition hover:bg-dark-green hover:text-white"
             >
-              Ablehnen
+              {t("decline")}
             </button>
 
             <button
@@ -69,7 +71,7 @@ export default function CookieBanner() {
               onClick={acceptCookies}
               className="rounded-full bg-gold px-5 py-3 text-sm font-semibold text-white transition hover:bg-dark-green"
             >
-              Akzeptieren
+              {t("accept")}
             </button>
           </div>
         </div>
