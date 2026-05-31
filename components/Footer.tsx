@@ -1,4 +1,4 @@
-// components/Footer.tsx
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -6,7 +6,10 @@ export default function Footer() {
       <div className="mx-auto grid max-w-7xl gap-8 text-center md:grid-cols-[1fr_1.2fr_1fr] md:text-left">
         <div>
           <div className="font-serif text-2xl">Martinshof Apartments</div>
-          <p className="mt-3 text-sm text-white/60">© 2026 Martinshof</p>
+
+          <p className="mt-3 text-sm text-white/60">
+            © 2026 Martinshof Apartments
+          </p>
         </div>
 
         <address className="not-italic leading-7 text-white/70">
@@ -18,10 +21,23 @@ export default function Footer() {
         </address>
 
         <div className="flex flex-col items-center gap-3 text-sm text-white/70 md:items-end md:text-right">
-          <a href="#" className="transition hover:text-white">
+          <Link
+            href="/impressum"
+            className="transition hover:text-gold"
+          >
+            Impressum
+          </Link>
+
+          <Link
+            href="/datenschutz"
+            className="transition hover:text-gold"
+          >
             Datenschutz
-          </a>
-          <span>Erstellt von DVI</span>
+          </Link>
+
+          <span className="pt-2 text-white/50">
+            Erstellt von DVI Digital Solutions Studio
+          </span>
         </div>
       </div>
     </footer>
